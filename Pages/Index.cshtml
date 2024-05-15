@@ -27,10 +27,10 @@
         <!-- Customer 1 -->
         <div class="customer">
             <label for="name1">Name:</label>
-            <input type="text" id="name1" placeholder="Enter name" required>
+            <input type="text" id="name1" placeholder="Enter name" required/>
 
             <label for="email1">Email:</label>
-            <input type="email" id="email1" placeholder="Enter email" required>
+            <input type="email" id="email1" placeholder="Enter email" required/>
         </div>
 
         <!-- Buttons container -->
@@ -58,10 +58,10 @@
 
             newCustomerDiv.innerHTML = `
                 <label for="name${customerCount}">Name:</label>
-                <input type="text" id="name${customerCount}" placeholder="Enter name" required>
+                <input type="text" id="name${customerCount}" placeholder="Enter name" required/>
 
                 <label for="email${customerCount}">Email:</label>
-                <input type="email" id="email${customerCount}" placeholder="Enter email" required><br><br>
+                <input type="email" id="email${customerCount}" placeholder="Enter email" required/><br><br>
             `;
 
             document.getElementById('customerForm').appendChild(newCustomerDiv);
