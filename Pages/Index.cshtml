@@ -12,6 +12,12 @@
 <head>
     <title>CSS Case Backup Helper Tool</title>
     <!-- Add any necessary CSS or other head elements here -->
+    <style>
+        /* Style for the buttons */
+        #buttonContainer {
+            text-align: right;
+        }
+    </style>
 </head>
 <body>
     <h1>CSS Case Backup Helper Tool</h1>
@@ -27,10 +33,15 @@
             <input type="email" id="email1" placeholder="Enter email" required>
         </div>
 
-        <!-- Button to add more customers -->
-        <button type="button" onclick="addCustomer()">Add Another Customer</button>
+        <!-- Buttons container -->
+        <div id="buttonContainer">
+            <button type="button" onclick="addCustomer()">Add Another Customer</button>
 
-        <button type="button" onclick="submitForm()">Submit</button>
+            <button type="button" onclick="submitForm()">Submit</button>
+        </div>
+
+        
+        
     </form>
 
     <!-- Display area for API response and errors -->
@@ -87,7 +98,7 @@
             .then(data => {
                 // Handle the API response
                 const responseDiv = document.getElementById('apiResponse');
-                responseDiv.innerHTML = `API response: ${JSON.stringify(data)}`;
+                responseDiv.innerHTML = `Success`;
             })
             .catch(error => {
                 // Handle errors
