@@ -3,7 +3,98 @@
 @{    
     ViewData["Title"] = "Home page";
 }
-<div class="jumbotron">
+<!--<div class="jumbotron">
     <h1>.NET 💜 Azure</h1>
     <p class="lead">Example .NET app to Azure App Service.</p>
-</div>
+</div>-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Case Backup Helper Tool</title>
+    <!-- Add any necessary CSS or other head elements here -->
+</head>
+<body>
+    <h1>CSS Case Backup Helper Tool</h1>
+    <p>Please enter the below details</p>
+
+    <form id="customerForm">
+        <!-- Customer 1 -->
+        <div class="customer">
+            <label for="name1">Name:</label>
+            <input type="text" id="name1" placeholder="Enter name" required>
+
+            <label for="email1">Email:</label>
+            <input type="email" id="email1" placeholder="Enter email" required>
+        </div>
+
+        <!-- Button to add more customers -->
+        <button type="button" onclick="addCustomer()">Add Another Customer</button>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <!-- Display area for API response and errors -->
+    <div id="apiResponse"></div>
+
+    <!-- Include your JavaScript code -->
+    <script>
+        let customerCount = 1; // Initialize with the first customer
+
+        function addCustomer() {
+            customerCount++;
+            const newCustomerDiv = document.createElement('div');
+            newCustomerDiv.className = 'customer';
+
+            newCustomerDiv.innerHTML = `
+                <label for="name${customerCount}">Name:</label>
+                <input type="text" id="name${customerCount}" placeholder="Enter name" required>
+
+                <label for="email${customerCount}">Email:</label>
+                <input type="email" id="email${customerCount}" placeholder="Enter email" required>
+            `;
+
+            document.getElementById('customerForm').appendChild(newCustomerDiv);
+        }
+
+        function submitForm() {
+            const customers = []; // Array to store customer data
+
+            // Collect data for each customer
+            const customerDivs = document.querySelectorAll('.customer');
+            customerDivs.forEach((div, index) => {
+                const name = div.querySelector(`#name${index + 1}`).value;
+                const email = div.querySelector(`#email${index + 1}`).value;
+                customers.push({ name, email });
+            });
+
+            // Create JSON payload
+            const payload = JSON.stringify(customers);
+
+            // Make an API call (replace with your actual API endpoint)
+            fetch('https://prod-57.eastus.logic.azure.com:443/workflows/775283dd939d42d09f25d44cceb08380/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=MD0X-4Id5k-AvMDlSLVjMFUVBEO7owsjGvnzutfZku4', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: payload
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not successful');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Handle the API response
+                const responseDiv = document.getElementById('apiResponse');
+                responseDiv.innerHTML = `API response: ${JSON.stringify(data)}`;
+            })
+            .catch(error => {
+                // Handle errors
+                const responseDiv = document.getElementById('apiResponse');
+                responseDiv.innerHTML = `Error: ${error.message}`;
+            });
+        }
+    </script>
+</body>
+</html>
