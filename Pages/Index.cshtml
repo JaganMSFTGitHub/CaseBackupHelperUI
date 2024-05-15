@@ -71,7 +71,7 @@
             const payload = JSON.stringify(customers);
 
             // Make an API call (replace with your actual API endpoint)
-            fetch('/api/your-endpoint', {
+            fetch('https://prod-57.eastus.logic.azure.com:443/workflows/775283dd939d42d09f25d44cceb08380/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=MD0X-4Id5k-AvMDlSLVjMFUVBEO7owsjGvnzutfZku4', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
